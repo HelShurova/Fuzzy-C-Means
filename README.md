@@ -1,7 +1,7 @@
 ﻿# Fuzzy-C-Means
 
 Usage: main [OPTION...]
-  -d DELIMITER           --delimiter=DELIMITER            delimiter of attributes of objects in csv file
+  -d DELIMITER           --delimiter=DELIMITER            delimiter of attributes of objects in csv file\n
   -h                     --ignoreFirstLine                ignore first line - as it can be a header
   -f                     --ignoreFirstColumn              ignore first column - lines can be numbered
   -l                     --ignoreLastColumn               ignore last column - it can be class marker
