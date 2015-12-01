@@ -68,10 +68,10 @@ calculateBeloningForOneObjectForCluster distanceType object clusterCenter center
         let 
             countBeloning center 
                 --hammingDistance
-                | distanceType      = (hammingDistance object clusterCenter / (hammingDistance object center)) ** 2
+                | distanceType      = (hammingDistance object clusterCenter / $ replaceZero (hammingDistance object center) (hammingDistance object clusterCenter)) ** 2
                 --euclidDistance
-                | otherwise         = (euclidDistance object clusterCenter / (euclidDistance object center)) ** 2
-        (sum $ map (\center -> replaceNaN $ countBeloning center) centersMatrix) ** (-1)
+                | otherwise         = (euclidDistance object clusterCenter / $ replaceZero (euclidDistance object center) (euclidDistance object clusterCenter)) ** 2
+        (sum $ map (\center -> countBeloning center) centersMatrix) ** (-1)
         
 --get random matrix where element sum in row equals 1  
 randomMatrixAttachment :: Int -> Int -> IO[[Double]]
@@ -122,11 +122,11 @@ sumTwoObjects object1 object2 = zipWith (+) object1 object2
 randomArray :: Int -> [Double]
 randomArray size = Prelude.take size (repeat 0)
 
---if number equals NaN - the was division by 0 -> attachment coefficient equals 1  
-replaceNaN :: Double -> Double
-replaceNaN number 
-    | isNaN number    = 1
-    | otherwise = number
+--if  number1 = 0, set number1 = number2 - as result attachment coefficient equals 1  
+replaceZero :: Double -> Double -> Double
+replaceZero number1 number2 
+    | number1 = 0    = number2
+    | otherwise      = number1
     
 --first column of 2-dimensional array
 headColumn :: [[Double]] -> [Double]
