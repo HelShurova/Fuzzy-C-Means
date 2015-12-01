@@ -122,7 +122,7 @@ sumTwoObjects object1 object2 = zipWith (+) object1 object2
 randomArray :: Int -> [Double]
 randomArray size = Prelude.take size (repeat 0)
 
---if  number = 0 - current point is center - as result attachment coefficient equals 1  
+--if number isNan - result of division by zero - current point is center - as result attachment coefficient equals 1  
 replaceZero :: Double -> Double
 replaceZero number 
     | isNan number        = 1
